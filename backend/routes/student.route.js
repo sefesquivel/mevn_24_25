@@ -1,3 +1,5 @@
+// Updated the code to support latest version of mongoose
+
 const express = require('express');
 const studentRoute = express.Router();
 let StudentModel = require('../models/Student');
