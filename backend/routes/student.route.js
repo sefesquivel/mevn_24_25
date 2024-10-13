@@ -45,11 +45,14 @@ studentRoute.route('/update-student/:id').put(async (req, res, next) => {
   }
 });
 
-// Delete a student
+// Delete
 studentRoute.route('/delete-student/:id').delete(async (req, res, next) => {
   try {
-    const data = await StudentModel.findByIdAndRemove(req.params.id);
-    res.status(200).json({ msg: data });
+    const data = await StudentModel.findByIdAndDelete(req.params.id);  // Use findByIdAndDelete
+    if (!data) {
+      return res.status(404).json({ msg: "Student not found" });
+    }
+    res.status(200).json({ msg: "Student deleted successfully", data });
   } catch (error) {
     return next(error);
   }
